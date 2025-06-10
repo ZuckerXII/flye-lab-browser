@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>สถานะการทำงาน</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #ffffff;
+      color: #000000;
+    }
+
+    header {
+      background-color: #e3bc89;
+      color: white;
+      padding: 1rem 0;
+    }
+
+    .header-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 1rem;
+    }
+
+    .logo {
+      height: 50px;
+    }
+
+    .top-nav a {
+      color: rgb(0, 0, 0);
+      margin-left: 20px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    main.content {
+      max-width: 800px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+
+    h1 {
+      text-align: center;
+      color: #010101;
+    }
+
+    .embed-container {
+      position: relative;
+      width: 100%;
+      height: 450px;
+      margin: 20px auto;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .embed-container iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+
+    .admin-link {
+      text-align: left;
+      margin-top: 2rem;
+    }
+
+    .admin-link p {
+      color: red;
+      font-weight: bold;
+    }
+
+    .admin-link a {
+      font-weight: bold;
+      color: blue;
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .top-nav a {
+        display: block;
+        margin: 10px 0;
+      }
+
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .logo {
+        margin-bottom: 10px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <img src="crop.png" alt="โลโก้" class="logo" />
+      <nav class="top-nav">
+        <a href="index.html">หน้าแรก</a>
+        <a href="report.html">การแจ้งซ่อม</a>
+        <a href="status_request.html">สถานะการแจ้งซ่อม</a>
+        <a href="guide_3DPRINT.html">คู่มือ 3D Print</a>
+        <a href="contact.html">ติดต่อ</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="content">
+    <h1>สถานะการทำงานของเครื่องที่ 1</h1>
+    <p style="text-align: center;">ดูสถานะล่าสุดของเครื่องที่ 1 ได้จากแหล่งข้อมูลด้านล่าง:</p>
+
+    <div class="embed-container">
+      <iframe src="https://oe.ink/l/RWupvT2e6V" allowfullscreen></iframe>
+    </div>
+
+    <div class="admin-link">
+      <p>* เฉพาะผู้ดูแลเท่านั้น *</p>
+      <a href="https://l.facebook.com/l.php?u=https%3A%2F%2Foctoeverywhere.com%2Fdashboard%3Fsource%3Dnavbar%26fbclid%3DIwZXh0bgNhZW0CMTAAYnJpZBExb2UzaGxUakNsMHAxa0hweQEextUJj2D3i4eGiy4TSEZGk9F97KI-LqP4pnOZ65Ic2uRO4xiwp3w8_Dq4FHc_aem_LH2InqJ2XYA_oj3xvSK5DA&h=AT2wMAdezty4ORDWGOaqI-bLC6yEzQbe_IMMUYamWr80vhUCz0_rmNqRvKVBh1MKVmywEF4F033F9mdWc8W9EfQ8AFfywCzf53RTI6wsalH6ajI_diRMtK100f02BpE"
+         target="_blank">
+        เข้าสู่ระบบ OctoEverywhere
+      </a>
+    </div>
+  </main>
+</body>
+</html>

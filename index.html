@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>หน้าแรก – Predictive Maintenance 3D Printer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* ========== สไตล์กล่องข่าวประชาสัมพันธ์ ========== */
+    .news-section {
+      padding: 40px 20px;
+      background-color: #fff;
+      text-align: center;
+    }
+
+    .news-section h2 {
+      color: #ff6600;
+      font-size: 26px;
+      margin-bottom: 20px;
+    }
+
+    .news-card {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .news-image {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .news-content {
+      padding: 20px;
+    }
+
+    .news-content h3 {
+      font-size: 20px;
+      margin: 0 0 10px;
+      color: #333;
+    }
+
+    .news-content p {
+      color: #555;
+      font-size: 16px;
+    }
+
+    .news-link {
+      display: inline-block;
+      margin-top: 10px;
+      color: #007bff;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .news-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ========== ป้องกันแถบแจ้งเตือนล่างจอบังเนื้อหา ========== */
+    main, footer {
+      padding-bottom: 110px;
+    }
+  </style>
+</head>
+<body>
+  <!-- 🔶 ส่วนหัวเว็บไซต์ -->
+  <header>
+    <div class="header-inner">
+      <img src="crop.png" alt="โลโก้ Predictive Maintenance" class="logo" />
+      <nav class="top-nav">
+        <a href="index.html" class="active">หน้าแรก</a>
+        <a href="report.html">การแจ้งซ่อม</a>
+        <a href="status_request.html">สถานะการแจ้งซ่อม</a>
+        <a href="guide_3DPRINT.html">คู่มือการใช้งานเครื่อง 3D Print</a>
+        <a href="contact.html">ติดต่อเรา</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- 🔶 ข่าวสารประชาสัมพันธ์ (ย้ายไว้ด้านบนสุด) -->
+  <section class="news-section">
+    <h2>ข่าวสารประชาสัมพันธ์</h2>
+    <div class="news-card">
+      <img  src="gggg.png" alt="ข่าวประชาสัมพันธ์" class="news-image">
+      <div class="news-content">
+        <h3>อาคารเครื่องมือ 6</h3>
+        <p>ทางมหาวิทยาลัยจะมีการดับไฟประมาณ 1 ชั่วโมง เวลา 15.00 – 16.00 น. โปรดเตรียมการล่วงหน้า</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 🔷 เนื้อหาหลัก -->
+  <main>
+    <!-- 🔸 แบนเนอร์ -->
+    <section class="hero">
+      <img src="AMER1.webp" alt="รูปเครื่องพิมพ์ 3 มิติ" class="hero-image" />
+      <div class="hero-text">Predictive maintenance 3D printer</div>
+    </section>
+
+    <!-- 🔸 เมนูหลัก -->
+    <section class="section">
+      <div class="card">
+        <a href="status.html">
+          <img src="dd.png" alt="สถานะเครื่องพิมพ์" />
+          <h3>สถานะการทำงาน</h3>
+        </a>
+      </div>
+      <div class="card">
+        <a href="troubleshoot.html">
+          <img src="AKI.webp" alt="การแก้ปัญหาเบื้องต้น" />
+          <h3>วิธีการแก้ปัญหาเบื้องต้น</h3>
+        </a>
+      </div>
+      <div class="card">
+        <a href="maintenance.html">
+          <img src="all.jpg" alt="การบำรุงรักษา" />
+          <h3>การบำรุงรักษา</h3>
+        </a>
+      </div>
+      <div class="card">
+        <a href="booking.html">
+          <img src="Ohio.avif" alt="ระบบจองเครื่อง" />
+          <h3>ระบบจองเครื่อง 3D Printer</h3>
+        </a>
+      </div>
+    </section>
+  </main>
+</body>
+</html>

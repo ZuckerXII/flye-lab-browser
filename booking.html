@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <title>ระบบจองเครื่อง 3D Printer</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background-color: #f5f5f5;
+    }
+    header {
+      background-color: #e3bc89;
+      padding: 10px 20px;
+      color: white;
+    }
+    .header-inner {
+      max-width: 1200px;
+      margin: auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .logo {
+      height: 100px;
+      object-fit: contain;
+      filter: drop-shadow(0 0 6px rgba(0, 0, 0, 0.4));
+    }
+    .top-nav a {
+      color: white;
+      text-decoration: none;
+      margin-left: 20px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 5px;
+      transition: background-color 0.3s ease;
+    }
+    .top-nav a:hover {
+      background-color: #e3bc89;
+    }
+    .top-nav a.active {
+      background-color: #e67e22;
+      color: white;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 30px auto 60px auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+    }
+    h2, h3 {
+      text-align: center;
+      color: #333;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+      margin-top: 20px;
+    }
+    label {
+      font-weight: bold;
+    }
+    input, select, button {
+      padding: 10px;
+      font-size: 16px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      margin-top: 10px;
+      transition: background-color 0.3s ease;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+
+    table {
+      margin-top: 30px;
+      width: 100%;
+      border-collapse: collapse;
+    }
+    th, td {
+      padding: 10px;
+      text-align: center;
+      border: 1px solid #ccc;
+    }
+    th {
+      background-color: #f0f0f0;
+    }
+
+    .message {
+      text-align: center;
+      margin-top: 15px;
+      font-weight: bold;
+    }
+
+    @media (max-width: 600px) {
+      .header-inner {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .top-nav a {
+        margin-left: 0;
+        margin-right: 10px;
+        padding: 8px 12px;
+        display: inline-block;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="header-inner">
+    <img src="crop.png" alt="โลโก้" class="logo" />
+    <nav class="top-nav">
+      <a href="index.html">หน้าแรก</a>
+      <a href="report.html">การแจ้งซ่อม</a>
+      <a href="status_request.html">สถานะการแจ้งซ่อม</a>
+      <a href="guide_3DPRINT.html">คู่มือการใช้งานเครื่อง 3D Print</a>
+      <a href="contact.html">ติดต่อเรา</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+  <div class="container">
+    <h2>ระบบจองเครื่อง 3D Printer</h2>
+    <form id="bookingForm">
+      <label for="name">ชื่อผู้จอง:</label>
+      <input type="text" id="name" required />
+
+      <label for="machine">เลือกเครื่อง:</label>
+      <select id="machine" required></select>
+
+      <label for="date">วันที่:</label>
+      <input type="date" id="date" required />
+
+      <label for="timeslot">ช่วงเวลา:</label>
+      <select id="timeslot" required>
+        <option value="">-- เลือกช่วงเวลา --</option>
+        <option value="09:00-09:55">09:00 - 09:55</option>
+        <option value="10:00-10:55">10:00 - 10:55</option>
+        <option value="11:00-11:55">11:00 - 11:55</option>
+        <option value="13:00-13:55">13:00 - 13:55</option>
+        <option value="14:00-14:55">14:00 - 14:55</option>
+        <option value="15:00-15:55">15:00 - 15:55</option>
+        <option value="16:00-16:55">16:00 - 16:55</option>
+      </select>
+
+      <button type="submit">จองเครื่อง</button>
+    </form>
+
+    <div class="message" id="message"></div>
+
+    <h3>รายการจอง</h3>
+    <table id="bookingTable">
+      <thead>
+        <tr>
+          <th>ชื่อผู้จอง</th>
+          <th>เครื่อง</th>
+          <th>วันที่</th>
+          <th>ช่วงเวลา</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
+</main>
+
+<script>
+  const machineStatus = {
+    "3D Printer 1": "available",
+    "3D Printer 2": "available",
+    "3D Printer 3": "repair",
+    "3D Printer 4": "available"
+  };
+
+  let bookings = JSON.parse(localStorage.getItem('bookings') || '[]');
+
+  function updateMachineOptions() {
+    const machineSelect = document.getElementById("machine");
+    machineSelect.innerHTML = "<option value=''>-- เลือกเครื่อง --</option>";
+    for (const [machine, status] of Object.entries(machineStatus)) {
+      const option = document.createElement("option");
+      option.value = machine;
+      option.textContent = machine + (status === "repair" ? " (ซ่อมอยู่)" : "");
+      option.disabled = status === "repair";
+      machineSelect.appendChild(option);
+    }
+  }
+
+  function cleanOldBookings() {
+    const today = new Date();
+    bookings = bookings.filter(b => new Date(b.date) >= new Date(today.getFullYear(), today.getMonth(), today.getDate() - 1));
+    localStorage.setItem("bookings", JSON.stringify(bookings));
+  }
+
+  function updateBookingTable() {
+    const tbody = document.querySelector("#bookingTable tbody");
+    tbody.innerHTML = "";
+    bookings.forEach(b => {
+      const row = document.createElement("tr");
+      row.innerHTML = `<td>${b.name}</td><td>${b.machine}</td><td>${b.date}</td><td>${b.timeslot}</td>`;
+      tbody.appendChild(row);
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    cleanOldBookings();
+    updateMachineOptions();
+    updateBookingTable();
+
+    document.getElementById("bookingForm").addEventListener("submit", e => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const machine = document.getElementById("machine").value;
+      const date = document.getElementById("date").value;
+      const timeslot = document.getElementById("timeslot").value;
+      const message = document.getElementById("message");
+
+      if (machineStatus[machine] === "repair") {
+        message.textContent = "❌ เครื่องนี้กำลังซ่อมอยู่ ไม่สามารถจองได้";
+        return;
+      }
+
+      const duplicate = bookings.some(b => b.machine === machine && b.date === date && b.timeslot === timeslot);
+      if (duplicate) {
+        message.textContent = "❌ เครื่องนี้ถูกจองแล้วในช่วงเวลานี้";
+        return;
+      }
+
+      bookings.push({ name, machine, date, timeslot });
+      localStorage.setItem("bookings", JSON.stringify(bookings));
+      updateBookingTable();
+      message.textContent = "✅ จองสำเร็จแล้ว";
+      document.getElementById("bookingForm").reset();
+    });
+  });
+</script>
+
+</body>
+</html>
